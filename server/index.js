@@ -1,4 +1,5 @@
 const express = require("express");
+const swaggerSetup = require('./swagger');
 require('dotenv').config();
 const { MongoClient, ServerApiVersion } = require('mongodb');
 // test
@@ -14,6 +15,8 @@ const client = new MongoClient(uri, {
 });
 
 let resResult = "";
+
+swaggerSetup(app);
 
 async function run() {
   try {
@@ -169,3 +172,4 @@ run().then(() => {
     console.log(`Server listening on ${PORT}`);
   });
 }).catch(console.error);
+
