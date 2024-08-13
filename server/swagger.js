@@ -1,6 +1,7 @@
 const swaggerJsDoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
 
+// Basic swagger options
 const swaggerOptions = {
   swaggerDefinition: {
     openapi: '3.0.0',
@@ -11,13 +12,14 @@ const swaggerOptions = {
       contact: {
         name: 'API Support',
         email: 'support@example.com'
-      }
-    },
-    servers: [{ url: 'http://localhost:3000', description: 'Local server' }]
+      },
+      servers: [{ url: 'http://localhost:3000' }] // Change to your deployed URL
+    }
   },
-  apis: ['./server/routes/*.js']
+  apis: ['./server/routes/*.js'] // Path to your route files
 };
 
+// Initialize swagger-jsdoc
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
 
 module.exports = (app) => {
