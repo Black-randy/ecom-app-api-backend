@@ -1,8 +1,11 @@
-const express = require("express");
+const express = require('express');
 const swaggerSetup = require('./swagger');
 require('dotenv').config();
 const { MongoClient, ServerApiVersion } = require('mongodb');
-// test
+
+const app = express();
+
+// MongoDB connection URI and database name
 const uri = process.env.MONGO_URL;
 const dbName = "WillowCraft";
 
@@ -16,7 +19,11 @@ const client = new MongoClient(uri, {
 
 let resResult = "";
 
+// Setup Swagger before defining other routes
 swaggerSetup(app);
+
+// Middleware setup
+app.use(express.json());
 
 async function run() {
   try {
@@ -104,7 +111,6 @@ async function AddtoOrders(uid, pid, price) {
 }
 
 const PORT = process.env.PORT || 3001;
-const app = express();
 app.use(express.json());
 
 app.get("/api", (req, res) => {
